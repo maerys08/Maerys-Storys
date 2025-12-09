@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Maelys Stories</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600&family=Pacifico&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- ========== PANTALLA DE LOGIN / REGISTRO ========== -->
+<div id="auth-screen" class="auth-screen">
+  <div class="auth-card">
+    <div class="auth-logo">
+      <span class="logo-icon">🌷</span>
+      <span class="logo-text">Maelys Stories</span>
+    </div>
+    <p class="auth-subtitle">Tu rincón pastel para leer, sentir y estar en paz.</p>
+
+    <!-- LOGIN -->
+    <form id="loginForm" class="auth-form">
+      <h2>Iniciar sesión</h2>
+      <label>
+        Correo
+        <input type="email" id="loginCorreo" required>
+      </label>
+      <label>
+        Contraseña
+        <input type="password" id="loginPassword" required>
+      </label>
+      <button type="submit" class="btn-primary auth-btn">Entrar</button>
+      <p class="auth-switch">
+        ¿No tienes cuenta?
+        <button type="button" id="goRegister" class="link-btn">Registrarse</button>
+      </p>
+    </form>
+
+    <!-- REGISTRO -->
+    <form id="registerForm" class="auth-form hidden">
+      <h2>Registrarse</h2>
+      <label>
+        Nombre / Apodo
+        <input type="text" id="regNombre" required>
+      </label>
+      <label>
+        Correo
+        <input type="email" id="regCorreo" required>
+      </label>
+      <label>
+        Contraseña
+        <input type="password" id="regPassword" required>
+      </label>
+      <button type="submit" class="btn-primary auth-btn">Crear cuenta</button>
+      <p class="auth-switch">
+        ¿Ya tienes cuenta?
+        <button type="button" id="goLogin" class="link-btn">Iniciar sesión</button>
+      </p>
+    </form>
+
+    <!-- INVITADO -->
+    <button type="button" id="guestBtn" class="btn-secondary auth-btn" style="margin-top:10px;">
+      Entrar como invitado
+    </button>
+  </div>
+</div>
+
+<!-- ========== APLICACIÓN ========== -->
+<div id="app-shell" class="app-shell hidden">
+
+  <!-- HEADER -->
+  <header class="main-header">
+    <div class="logo">
+      <span class="logo-icon">🌷</span>
+      <span class="logo-text">Maelys Stories</span>
+    </div>
+
+    <nav class="main-nav">
+      <a href="#" data-section="inicio">Inicio</a>
+      <a href="#" data-section="historias">Biblioteca</a>
+      <a href="#" data-section="diario-lannie">Conoce a Lannie</a>
+      <a href="#" data-section="buzon">Buzón del Alma</a>
+      <a href="#" data-section="contacto">Contacto</a>
+      <a href="#" data-section="perfil" id="perfilMenuLink">Perfil</a>
+    </nav>
+
+    <div class="header-actions">
+      <button id="modo-toggle" class="modo-toggle">🌙</button>
+
+      <!-- Menú de tres puntitos -->
+      <div class="more-menu-container">
+        <button id="moreMenuBtn" class="more-menu-btn" aria-label="Más opciones">⋮</button>
+        <div id="moreMenu" class="more-menu hidden">
+          <button type="button" class="more-menu-item" data-menu="inicio">Inicio</button>
+          <button type="button" class="more-menu-item" data-menu="historias">Biblioteca</button>
+          <button type="button" class="more-menu-item" id="menuPerfilItem" data-menu="perfil">Mi perfil</button>
+          <button type="button" class="more-menu-item" id="menuCerrarSesion">Cerrar sesión</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========== INICIO ========== -->
+  <section id="inicio" class="section app-section active">
+
+    <!-- 🎵 Reproductor arriba izquierda -->
+    <div class="music-widget music-top-left">
+      <p class="music-label">Música suave para acompañar la lectura 🎧</p>
+      <audio controls>
+        <source src="musica.mp3" type="audio/mpeg">
+        Tu navegador no soporta el reproductor de audio.
+      </audio>
+      <p class="music-note">
+        Coloca un archivo llamado <strong>musica.mp3</strong> en la misma carpeta de esta página.
+      </p>
+    </div>
+
+    <!-- Título + Lannie en columna -->
+    <div class="hero hero-column">
+      <div class="hero-left">
+        <h2 class="bienvenida-peque grande-bienvenida">Bienvenidos a</h2>
+        <h1 class="marca-grande">Maelys Stories</h1>
+        <p>
+          Un rincón pastel para leer con calma, llorar bonito si hace falta
+          y sentirte acompañada por Lannie.
+        </p>
+        <a href="#" data-section="historias" class="btn-primary nav-link-btn">Ver historias</a>
+      </div>
+
+      <div class="hero-right">
+        <div class="hero-card">
+          <img src="lannie.jpeg" alt="Lannie" class="lannie-img">
+          <p class="hero-text">“Aquí puedes ir despacio, está bien.”</p>
+          <div class="hero-books">🎀🧸🎀</div>
+        </div>
+      </div>
+    </div>
+
+  <!-- HISTORIAS DESTACADAS (integradas) -->
+  <div id="destacadasInicio" class="destacadas-inicio section">
+    <h3 class="destacadas-title">Historias Destacadas</h3>
+    <div id="destacadasGrid" class="destacadas-grid"></div>
+  </div>
+
+
+    <!-- Burbuja del autor debajo de Lannie -->
+    <div class="sobre-mi-box">
+      <button id="sobreMiToggle" class="bubble-btn">
+        <div class="bubble-author">
+          <div class="bubble-avatar">
+            <span id="bubbleAvatarInicial" class="bubble-avatar-inicial">M</span>
+            <img id="bubbleAvatarImg" class="bubble-avatar-img hidden" alt="Autor">
+          </div>
+          <span class="bubble-author-text">Sobre el autor</span>
+        </div>
+      </button>
+
+      <div id="sobreMiContent" class="sobre-mi-content">
+        <p>
+          Soy Maelys, una mente llena de imaginación e ideas que nacen desde la convivencia
+          con mi ser espiritual, desde la voz de mi niña interior.
+        </p>
+        <p>
+          Escribo porque es mi forma de entenderme, de ordenar lo que siento y de acompañarme
+          cuando el ruido del mundo se vuelve demasiado fuerte.
+        </p>
+        <p>
+          Maelys Stories nació como un refugio.  
+          Y Lannie nació del deseo de sentirme acompañada y en paz.
+        </p>
+        <p style="margin-top:10px;">
+          <button class="chip-btn nav-link-btn" data-section="perfil">Ir al perfil del autor</button>
+        </p>
+      </div>
+    </div>
+
+    <!-- Burbuja de estado emocional -->
+    <div class="estado-autor">
+      <p class="estado-chip">Estado emocional</p>
+    </div>
+
+  </section>
+
+  <!-- ========== HISTORIAS ========== -->
+  <section id="historias" class="section app-section">
+    <div class="section-title">
+      <h2>Biblioteca</h2>
+      <p>Aquí viven tus historias, cada una con sus capítulos.</p>
+    </div>
+
+    <button id="addHistoriaBtn" class="btn-secondary">+ Nueva historia</button>
+
+    <div id="historiasLista" class="stories-grid"></div>
+
+    <div id="historiaDetalle" class="historia-detalle hidden">
+      <div class="historia-detalle-header">
+        <h3 id="historiaDetalleTitulo">Historia seleccionada</h3>
+        <button id="cerrarDetalleBtn" class="chip-btn">Cerrar</button>
+      </div>
+
+      <button id="addCapituloBtn" class="btn-secondary small">+ Nuevo capítulo</button>
+      <button id="toggleCapitulosBtn" class="chip-btn">Mostrar capítulos</button>
+
+      <div id="capitulosLista" class="capitulos-lista hidden"></div>
+    </div>
+  </section>
+
+  <!-- ========== DIARIO DE LANNIE ========== -->
+  <section id="diario-lannie" class="section app-section">
+  <div class="section-title">
+    <h2>Conoce a Lannie</h2>
+    <p>Notas sobre Lannie, su historia y pequeños secretos que acompañan al refugio.</p>
+  </div>
+
+  <div class="lannie-grid">
+    <div class="lannie-bio-card">
+      <h3>Biografía de Lannie</h3>
+      <div class="lannie-bio-content">
+        <p>Lannie nació en un octubre lleno de luz suave, cuando las ideas de Maelys estaban apenas tomando forma. Tiene dos añitos, una edad donde la curiosidad es su principal estrategia de crecimiento y la ternura su mayor ventaja competitiva. Desde el primer día llegó con una mezcla única: mitad patito, mitad conejo, completamente corazón. Esa combinación inesperada lo convirtió en un símbolo de adaptación, resiliencia y conexión emocional dentro del universo creativo de Maelys.</p>
+
+        <p>Sus colores favoritos —amarillo y rosa pastel— no son casualidad. El amarillo representa la energía cálida con la que ilumina los días complicados, mientras el rosa pastel es su sello emocional, un recordatorio de que la sensibilidad también es una fortaleza operativa en cualquier proceso de creación. Cada vez que Lannie aparece, trae consigo una vibra ligera, como si el ambiente se alineara automáticamente a un modo más amable.</p>
+
+        <p>Ama los cumpleaños con devoción absoluta. Para él, cada celebración es un KPI emocional: un indicador de alegría, de nuevas etapas, de creatividad en expansión. Octubre es su mes favorito porque es cuando sopla sus velitas, un ritual donde renueva sus sueños de forma estratégica: crecer, apoyar, inspirar, y ser un buen compañero espiritual para quienes lo rodean.</p>
+
+        <p>Lannie es un pequeño fashion lover. No importa si es un lazo pastel, una bufandita o un sombrero minimalista: siempre está alineado a la tendencia que mejor represente el mood del día. Para él, la moda es narrativa visual; la usa como un canal para comunicar su esencia y fortalecer la identidad de marca que comparte con Maelys.</p>
+
+        <p>Como animal espiritual, Lannie no solo observa tu camino; lo acompaña. En los días tristes, activa su rol más valioso: el de soporte emocional. Se instala a tu lado sin hacer ruido, sin prisa, como un pequeño analista del alma que detecta cuando tu energía necesita un empujoncito. Su presencia genera un tipo de estabilidad suave, una especie de “gestión interna” del ánimo que ayuda a que todo vuelva a su ritmo natural.</p>
+
+        <p>A lo largo del tiempo, Lannie se ha convertido en algo más que una mascota simbólica. Es parte de la visión creativa, parte del propósito y parte del corazón de cada historia. Representa ese recordatorio silencioso de que incluso en los procesos más complejos existe espacio para la magia, la ternura y el crecimiento auténtico.</p>
+
+        <p>Lannie no solo existe en el universo de Maelys: opera como su aliado emocional, su asistente creativo y su compañero estratégico en cada etapa del viaje.</p>
+      </div>
+    </div>
+
+    <div class="lannie-secrets-card">
+      <h3>Secretos de Lannie</h3>
+      <ol class="lannie-secrets-list">
+        <li><strong>Sueña en colores suaves.</strong> Cuando duerme, imagina fiestas de cumpleaños infinitas donde todo brilla en amarillo y rosa pastel. Dice que así recarga su energía para seguir inspirando cada día.</li>
+        <li><strong>Detecta tristezas en silencio.</strong> Tiene un instinto especial para notar cuando tu ánimo cae. No avisa, no interrumpe: solo se acerca, se acurruca y te acompaña hasta que la carga emocional se vuelve más liviana.</li>
+        <li><strong>Ama las velitas tanto como los deseos.</strong> Colecciona velas de cumpleaños, incluso cuando no es su mes. Cree que cada velita guarda un deseo de emergencia, por si algún día necesitás uno.</li>
+        <li><strong>Tiene un ritual antes de dormir.</strong> Acomoda sus moñitos, bufanditas y accesorios pastel como si fueran parte de una rutina ejecutiva. Para Lannie, estar en orden por fuera ayuda a estar en calma por dentro.</li>
+        <li><strong>Se derrite con los abrazos.</strong> Tiene un punto débil: los abrazos suaves. Apenas recibe uno, su colita-pompón empieza a moverse como señal de que su sistema emocional está “operando en felicidad máxima”.</li>
+        <li><strong>Guarda un superpoder discreto.</strong> Puede transformar un día pesado en uno manejable solo agitando sus orejitas. No lo hace para presumir; lo hace porque cree que la esperanza siempre debe ser un recurso renovable.</li>
+        <li><strong>Conserva una frase solo para vos.</strong> Lannie repite en su interior: “Todo florece cuando vos te animás.” Y cada vez que te ve dudar, la piensa más fuerte, como si pudiera impulsarte sin palabras.</li>
+      </ol>
+      <div style="margin-top:12px;">
+        <button id="addLannieNoteBtn" class="chip-btn">Añadir nota (Autor)</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- ========== BUZÓN DEL ALMA ========== -->
+  <section id="buzon" class="section app-section">
+    <div class="section-title">
+      <h2>Buzón del Alma</h2>
+      <p>Mensajes anónimos que se quedan aquí, en un lugar seguro.</p>
+    </div>
+
+    <div class="buzon-box">
+      <p class="buzon-info">
+        Este es un espacio libre para enviar mensajes anónimos, desahogarte
+        y soltar lo que llevas dentro sin juicios.
+      </p>
+      <textarea id="buzonTexto" placeholder="Escribe aquí tu mensaje anónimo..."></textarea>
+      <button id="buzonEnviarBtn" class="btn-primary">Enviar mensaje anónimo</button>
+    </div>
+
+    <div id="buzonMensajes" class="buzon-mensajes"></div>
+  </section>
+
+  <!-- ========== CONTACTO ========== -->
+  <section id="contacto" class="section app-section">
+    <div class="section-title">
+      <h2>Contacto</h2>
+      <p>Si quieres mandarle un mensaje al autor, puedes hacerlo aquí.</p>
+    </div>
+
+    <form id="contactoForm" class="contact-form" onsubmit="return false;">
+      <label>
+        Nombre
+        <input type="text" id="contactoNombre" required>
+      </label>
+      <label>
+        Correo
+        <input type="email" id="contactoCorreo" required>
+      </label>
+      <label>
+        Mensaje
+        <textarea id="contactoMensaje" rows="4" required></textarea>
+      </label>
+      <button id="contactoEnviarBtn" class="btn-primary">Enviar mensaje</button>
+    </form>
+
+    <div class="contact-extra">
+      <p>Sígueme también en redes:</p>
+      <ul>
+        <li>Instagram: <strong>@maryjm_09</strong></li>
+        <li>TikTok: <strong>@chessky_</strong></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ========== PERFIL / AUTOR ========== -->
+  <section id="perfil" class="section app-section">
+    <div class="section-title">
+      <h2 id="perfilTitulo">Perfil</h2>
+      <p id="perfilSubtitulo">Tu espacio personal dentro de Maelys Stories.</p>
+    </div>
+
+    <div class="perfil-top">
+      <div class="perfil-avatar-box">
+        <div id="avatarCircle" class="perfil-avatar">
+          <span id="avatarInicial" class="perfil-avatar-inicial">M</span>
+          <img id="avatarImg" class="perfil-avatar-img hidden" alt="Avatar">
+        </div>
+        <label class="perfil-avatar-btn" id="avatarLabel">
+          Cambiar foto
+          <input type="file" id="avatarInput" accept="image/*" hidden>
+        </label>
+      </div>
+
+      <div class="perfil-info">
+        <h3 id="perfilNombre">Maelys</h3>
+        <p id="perfilCorreo" class="perfil-correo"></p>
+        <span id="perfilRolBadge" class="badge-rol lector">Lector</span>
+
+        <div class="perfil-actions">
+          <button id="editarApodoBtn" class="chip-btn">Editar apodo</button>
+          <button id="cambiarPassBtn" class="chip-btn">Cambiar contraseña</button>
+          <button id="cambiarEstadoBtn" class="chip-btn">Cambiar estado de ánimo</button>
+          <button id="cerrarSesionBtn" class="chip-btn danger">Cerrar sesión</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SOLO AUTOR: LISTA DE MIEMBROS REGISTRADOS -->
+    <div id="autorZona" class="autor-zona hidden">
+      <h3>Miembros registrados</h3>
+      <p class="autor-miembros-info">Solo el autor puede ver esta lista y resetear contraseñas.</p>
+      <div id="miembrosLista" class="miembros-lista"></div>
+    </div>
+
+    <!-- GALERÍA VISUAL DEL AUTOR -->
+    <div id="galeriaAutor" class="autor-galeria">
+      <h3>Notas visuales del autor</h3>
+      <p class="autor-miembros-info">Pequeños fragmentos en imágenes que acompañan las historias.</p>
+      <button id="addNotaVisualBtn" class="btn-secondary">+ Nueva nota visual</button>
+      <div id="galeriaGrid" class="galeria-grid"></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="main-footer">
+    <p>© <span id="year"></span> Maelys Stories. Todos los derechos reservados al autor.</p>
+  </footer>
+
+</div>
+
+<!-- ========== SCRIPT PRINCIPAL ========== -->
+<script>
+  const AUTHOR_EMAIL = "marevall2004@gmail.com";
+
+  const yearEl = document.getElementById("year");
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  // ESTADO DE ÁNIMO (lo seguimos guardando aunque solo shows burbuja)
+  let estadoAutor = localStorage.getItem("estado_autor") || "En calma";
+  const estadoTexto = document.getElementById("estadoTexto"); // puede ser null
+  function saveEstadoAutor() {
+    localStorage.setItem("estado_autor", estadoAutor);
+  }
+  function actualizarEstadoInicio() {
+    if (estadoTexto) estadoTexto.textContent = estadoAutor;
+  }
+
+  // USUARIOS
+  let usuarios = [];
+  let usuarioActual = null;
+  try { usuarios = JSON.parse(localStorage.getItem("usuarios_ms") || "[]"); } catch { usuarios = []; }
+  function guardarUsuarios() {
+    localStorage.setItem("usuarios_ms", JSON.stringify(usuarios));
+  }
+
+  function limpiarSesion() {
+    localStorage.removeItem("usuario_actual_ms");
+    usuarioActual = null;
+  }
+
+  const authScreen = document.getElementById("auth-screen");
+  const appShell = document.getElementById("app-shell");
+
+  const loginForm = document.getElementById("loginForm");
+  const registerForm = document.getElementById("registerForm");
+  const goRegister = document.getElementById("goRegister");
+  const goLogin = document.getElementById("goLogin");
+  const guestBtn = document.getElementById("guestBtn");
+
+  if (goRegister) goRegister.onclick = () => {
+    loginForm.classList.add("hidden");
+    registerForm.classList.remove("hidden");
+  };
+  if (goLogin) goLogin.onclick = () => {
+    registerForm.classList.add("hidden");
+    loginForm.classList.remove("hidden");
+  };
+
+  if (loginForm) {
+    loginForm.onsubmit = (e) => {
+      e.preventDefault();
+      const correo = document.getElementById("loginCorreo").value.trim().toLowerCase();
+      const pass = document.getElementById("loginPassword").value;
+      const user = usuarios.find(u => u.correo === correo && u.password === pass);
+      if (!user) { alert("Correo o contraseña incorrectos."); return; }
+      if (user.baneado) { alert("Tu cuenta ha sido bloqueada por el autor."); return; }
+      usuarioActual = user;
+      entrarAlSistema();
+    };
+  }
+
+  if (registerForm) {
+    registerForm.onsubmit = (e) => {
+      e.preventDefault();
+      const nombre = document.getElementById("regNombre").value.trim();
+      const correo = document.getElementById("regCorreo").value.trim().toLowerCase();
+      const pass = document.getElementById("regPassword").value;
+      if (usuarios.some(u => u.correo === correo)) {
+        alert("Este correo ya está registrado.");
+        return;
+      }
+      const rol = correo === AUTHOR_EMAIL.toLowerCase() ? "Autor" : "Lector";
+      const nuevo = {
+        nombre,
+        correo,
+        password: pass,
+        rol,
+        avatar: null,
+        fechaRegistro: new Date().toLocaleString(),
+        baneado: false
+      };
+      usuarios.push(nuevo);
+      guardarUsuarios();
+      usuarioActual = nuevo;
+      entrarAlSistema();
+    };
+  }
+
+  if (guestBtn) {
+    guestBtn.onclick = () => {
+      usuarioActual = {
+        nombre: "Invitado",
+        correo: "",
+        password: "",
+        rol: "Invitado",
+        avatar: null,
+        fechaRegistro: null,
+        baneado: false
+      };
+      entrarAlSistema();
+    };
+  }
+
+  function entrarAlSistema() {
+    if (usuarioActual && usuarioActual.baneado) {
+      alert("Tu cuenta ha sido bloqueada por el autor.");
+      limpiarSesion();
+      return;
+    }
+    authScreen.classList.add("hidden");
+    appShell.classList.remove("hidden");
+    inicializarApp();
+  }
+
+  function salirDelSistema() {
+    limpiarSesion();
+    appShell.classList.add("hidden");
+    authScreen.classList.remove("hidden");
+  }
+
+  // Sesión persistente
+  try {
+    const correoGuardado = localStorage.getItem("usuario_actual_ms");
+    if (correoGuardado) {
+      const u = usuarios.find(x => x.correo === correoGuardado);
+      if (u && !u.baneado) {
+        usuarioActual = u;
+        entrarAlSistema();
+      } else {
+        limpiarSesion();
+      }
+    }
+  } catch {
+    limpiarSesion();
+  }
+
+  // SPA NAV
+  const sections = document.querySelectorAll(".app-section");
+  const navLinks = document.querySelectorAll(".main-nav a[data-section]");
+  const navButtons = document.querySelectorAll(".nav-link-btn");
+  const perfilMenuLink = document.getElementById("perfilMenuLink");
+
+  function showSection(id) {
+    sections.forEach(sec => {
+      if (sec.id === id) sec.classList.add("active");
+      else sec.classList.remove("active");
+    });
+  }
+
+  navLinks.forEach(link => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      const target = link.getAttribute("data-section");
+      if (target) showSection(target);
+    });
+  });
+
+  navButtons.forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const target = btn.getAttribute("data-section");
+      if (target) showSection(target);
+    });
+  });
+
+  // MODO NOCHE
+  const modoToggle = document.getElementById("modo-toggle");
+  if (modoToggle) modoToggle.onclick = () => {
+    document.body.classList.toggle("night-mode");
+  };
+
+  // MENÚ TRES PUNTITOS
+  const moreMenuBtn = document.getElementById("moreMenuBtn");
+  const moreMenu = document.getElementById("moreMenu");
+  const menuPerfilItem = document.getElementById("menuPerfilItem");
+  const menuCerrarSesion = document.getElementById("menuCerrarSesion");
+
+  if (moreMenuBtn && moreMenu) {
+    moreMenuBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      moreMenu.classList.toggle("hidden");
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!moreMenu.contains(e.target) && e.target !== moreMenuBtn) {
+        moreMenu.classList.add("hidden");
+      }
+    });
+
+    moreMenu.addEventListener("click", (e) => {
+      const btn = e.target.closest(".more-menu-item");
+      if (!btn) return;
+      const action = btn.getAttribute("data-menu");
+      if (action === "inicio") {
+        showSection("inicio");
+      } else if (action === "historias") {
+        showSection("historias");
+      } else if (action === "perfil") {
+        showSection("perfil");
+      }
+      moreMenu.classList.add("hidden");
+    });
+  }
+
+  if (menuCerrarSesion) {
+    menuCerrarSesion.addEventListener("click", () => {
+      moreMenu.classList.add("hidden");
+      if (confirm("¿Cerrar sesión?")) {
+        salirDelSistema();
+      }
+    });
+  }
+
+  // SOBRE MÍ ACORDEÓN
+  const sobreMiToggle = document.getElementById("sobreMiToggle");
+  const sobreMiContent = document.getElementById("sobreMiContent");
+  if (sobreMiToggle && sobreMiContent) {
+    sobreMiToggle.onclick = () => {
+      sobreMiContent.classList.toggle("open");
+    };
+  }
+
+  // LOCALSTORAGE CONTENIDO
+  let historias = [];
+  let diario = [];
+  let buzMensajes = [];
+  try { historias = JSON.parse(localStorage.getItem("historias_v2") || "[]"); } catch { historias = []; }
+  try { diario = JSON.parse(localStorage.getItem("diario_lannie") || "[]"); } catch { diario = []; }
+  try { buzMensajes = JSON.parse(localStorage.getItem("buzon_mensajes") || "[]"); } catch { buzMensajes = []; }
+
+  function saveHistorias() { localStorage.setItem("historias_v2", JSON.stringify(historias)); }
+  function saveDiario() { localStorage.setItem("diario_lannie", JSON.stringify(diario)); }
+  function saveBuzon() { localStorage.setItem("buzon_mensajes", JSON.stringify(buzMensajes)); }
+
+  // HISTORIAS
+  const historiasLista = document.getElementById("historiasLista");
+  const historiaDetalle = document.getElementById("historiaDetalle");
+  const historiaDetalleTitulo = document.getElementById("historiaDetalleTitulo");
+  const capitulosLista = document.getElementById("capitulosLista");
+  const addHistoriaBtn = document.getElementById("addHistoriaBtn");
+  const cerrarDetalleBtn = document.getElementById("cerrarDetalleBtn");
+  const addCapituloBtn = document.getElementById("addCapituloBtn");
+  const toggleCapitulosBtn = document.getElementById("toggleCapitulosBtn");
+  let historiaSeleccionadaIndex = null;
+
+  function renderHistorias() {
+    if (!historiasLista) return;
+    historiasLista.innerHTML = "";
+    historias.forEach((h, index) => {
+      const card = document.createElement("div");
+      card.className = "story-card historia-card";
+
+      const title = document.createElement("h3");
+      title.textContent = h.titulo || "Historia sin título";
+
+      const actions = document.createElement("div");
+      actions.className = "historia-actions";
+
+      const verBtn = document.createElement("button");
+      verBtn.className = "chip-btn";
+      verBtn.textContent = "Ver";
+      verBtn.onclick = () => abrirDetalleHistoria(index);
+
+      const editarBtn = document.createElement("button");
+      editarBtn.className = "chip-btn";
+      editarBtn.textContent = "Editar";
+      editarBtn.onclick = () => {
+        if (!usuarioActual || usuarioActual.rol !== "Autor") {
+          alert("Solo el autor puede editar historias.");
+          return;
+        }
+        const nuevo = prompt("Nuevo título de la historia:", h.titulo || "");
+        if (!nuevo || !nuevo.trim()) return;
+        historias[index].titulo = nuevo.trim();
+        saveHistorias();
+        renderHistorias();
+        if (historiaSeleccionadaIndex === index && historiaDetalleTitulo) {
+          historiaDetalleTitulo.textContent = nuevo.trim();
+        }
+      };
+
+      const borrarBtn = document.createElement("button");
+      borrarBtn.className = "chip-btn danger";
+      borrarBtn.textContent = "Borrar";
+      borrarBtn.onclick = () => {
+        if (!usuarioActual || usuarioActual.rol !== "Autor") {
+          alert("Solo el autor puede borrar historias.");
+          return;
+        }
+        if (confirm("¿Eliminar esta historia y todos sus capítulos?")) {
+          historias.splice(index, 1);
+          saveHistorias();
+          renderHistorias();
+          if (historiaSeleccionadaIndex === index) {
+            historiaSeleccionadaIndex = null;
+            if (historiaDetalle) historiaDetalle.classList.add("hidden");
+          }
+        }
+      };
+
+      actions.appendChild(verBtn);
+      actions.appendChild(editarBtn);
+      actions.appendChild(borrarBtn);
+
+      card.appendChild(title);
+      card.appendChild(actions);
+
+      historiasLista.appendChild(card);
+    });
+  }
+
+  function abrirDetalleHistoria(i) {
+    if (!historiaDetalle || !historiaDetalleTitulo || !capitulosLista) return;
+    historiaSeleccionadaIndex = i;
+    const h = historias[i];
+    historiaDetalleTitulo.textContent = h.titulo || "Historia sin título";
+    renderCapitulos();
+    historiaDetalle.classList.remove("hidden");
+    capitulosLista.classList.add("hidden");
+    if (toggleCapitulosBtn) toggleCapitulosBtn.textContent = "Mostrar capítulos";
+  }
+
+  function renderCapitulos() {
+    if (!capitulosLista) return;
+    capitulosLista.innerHTML = "";
+    if (historiaSeleccionadaIndex === null) return;
+    const h = historias[historiaSeleccionadaIndex];
+    (h.capitulos || []).forEach((c, idx) => {
+      const card = document.createElement("div");
+      card.className = "capitulo-card";
+
+      const t = document.createElement("h4");
+      t.textContent = c.titulo || `Capítulo ${idx + 1}`;
+
+      const p = document.createElement("p");
+      p.textContent = c.texto || "";
+
+      const actions = document.createElement("div");
+      actions.className = "capitulo-actions";
+
+      const borrarBtn = document.createElement("button");
+      borrarBtn.className = "chip-btn danger";
+      borrarBtn.textContent = "Borrar capítulo";
+      borrarBtn.onclick = () => {
+        if (!usuarioActual || usuarioActual.rol !== "Autor") {
+          alert("Solo el autor puede borrar capítulos.");
+          return;
+        }
+        if (confirm("¿Eliminar este capítulo?")) {
+          h.capitulos.splice(idx, 1);
+          saveHistorias();
+          renderCapitulos();
+        }
+      };
+
+      actions.appendChild(borrarBtn);
+
+      card.appendChild(t);
+      card.appendChild(p);
+      card.appendChild(actions);
+
+      capitulosLista.appendChild(card);
+    });
+  }
+
+  if (addHistoriaBtn) {
+    addHistoriaBtn.onclick = () => {
+      if (!usuarioActual || usuarioActual.rol !== "Autor") {
+        alert("Solo el autor puede crear historias.");
+        return;
+      }
+      const titulo = prompt("Título de la nueva historia:");
+      if (!titulo || !titulo.trim()) return;
+      historias.push({ titulo: titulo.trim(), capitulos: [] });
+      saveHistorias();
+      renderHistorias();
+    };
+  }
+
+  if (addCapituloBtn) {
+    addCapituloBtn.onclick = () => {
+      if (!usuarioActual || usuarioActual.rol !== "Autor") {
+        alert("Solo el autor puede agregar capítulos.");
+        return;
+      }
+      if (historiaSeleccionadaIndex === null) {
+        alert("Primero selecciona una historia.");
+        return;
+      }
+      const tituloCap = prompt("Título del capítulo:");
+      if (!tituloCap || !tituloCap.trim()) return;
+      const textoCap = prompt("Contenido del capítulo:");
+      historias[historiaSeleccionadaIndex].capitulos.push({
+        titulo: tituloCap.trim(),
+        texto: textoCap ? textoCap.trim() : ""
+      });
+      saveHistorias();
+      renderCapitulos();
+    };
+  }
+
+  if (cerrarDetalleBtn) {
+    cerrarDetalleBtn.onclick = () => {
+      historiaSeleccionadaIndex = null;
+      if (historiaDetalle) historiaDetalle.classList.add("hidden");
+    };
+  }
+
+  if (toggleCapitulosBtn && capitulosLista) {
+    toggleCapitulosBtn.onclick = () => {
+      capitulosLista.classList.toggle("hidden");
+      if (capitulosLista.classList.contains("hidden")) {
+        toggleCapitulosBtn.textContent = "Mostrar capítulos";
+      } else {
+        toggleCapitulosBtn.textContent = "Ocultar capítulos";
+      }
+    };
+  }
+
+  // DIARIO LANNIE
+  const diarioLista = document.getElementById("diarioLista");
+  const addNotaDiarioBtn = document.getElementById("addNotaDiarioBtn");
+
+  function renderDiario() {
+    if (!diarioLista) return;
+    diarioLista.innerHTML = "";
+    diario.forEach((nota, idx) => {
+      const card = document.createElement("div");
+      card.className = "diario-entry";
+
+      const p = document.createElement("p");
+      p.textContent = nota.texto;
+
+      const meta = document.createElement("span");
+      meta.className = "diario-meta";
+      meta.textContent = nota.fecha || "";
+
+      card.appendChild(p);
+      card.appendChild(meta);
+
+      if (usuarioActual && usuarioActual.rol === "Autor") {
+        const actions = document.createElement("div");
+        actions.className = "historia-actions";
+
+        const editarBtn = document.createElement("button");
+        editarBtn.className = "chip-btn";
+        editarBtn.textContent = "Editar";
+        editarBtn.onclick = () => {
+          const nuevo = prompt("Editar nota:", nota.texto);
+          if (!nuevo || !nuevo.trim()) return;
+          diario[idx].texto = nuevo.trim();
+          saveDiario();
+          renderDiario();
+        };
+
+        const borrarBtn = document.createElement("button");
+        borrarBtn.className = "chip-btn danger";
+        borrarBtn.textContent = "Eliminar";
+        borrarBtn.onclick = () => {
+          if (confirm("¿Eliminar esta nota?")) {
+            diario.splice(idx, 1);
+            saveDiario();
+            renderDiario();
+          }
+        };
+
+        actions.appendChild(editarBtn);
+        actions.appendChild(borrarBtn);
+        card.appendChild(actions);
+      }
+
+      diarioLista.appendChild(card);
+    });
+  }
+
+  if (addNotaDiarioBtn) {
+    addNotaDiarioBtn.onclick = () => {
+      if (!usuarioActual || usuarioActual.rol !== "Autor") {
+        alert("Solo el autor puede agregar notas al diario de Lannie.");
+        return;
+      }
+      const nota = prompt("Escribe la nueva nota para el diario de Lannie:");
+      if (!nota || !nota.trim()) return;
+      diario.unshift({
+        texto: nota.trim(),
+        fecha: new Date().toLocaleString()
+      });
+      saveDiario();
+      renderDiario();
+    };
+  }
+
+  // BUZÓN
+  const buzonTexto = document.getElementById("buzonTexto");
+  const buzonEnviarBtn = document.getElementById("buzonEnviarBtn");
+  const buzonMensajesDiv = document.getElementById("buzonMensajes");
+
+  function renderBuzon() {
+    if (!buzonMensajesDiv) return;
+    buzonMensajesDiv.innerHTML = "";
+    const mensajes = [...buzMensajes].reverse();
+    mensajes.forEach(msg => {
+      const card = document.createElement("div");
+      card.className = "buzon-mensaje-card";
+
+      const p = document.createElement("p");
+      p.textContent = msg.texto;
+
+      const meta = document.createElement("span");
+      meta.className = "buzon-meta";
+      meta.textContent = msg.fecha || "";
+
+      card.appendChild(p);
+      card.appendChild(meta);
+
+      buzonMensajesDiv.appendChild(card);
+    });
+  }
+
+  if (buzonEnviarBtn) {
+    buzonEnviarBtn.onclick = () => {
+      if (!usuarioActual || usuarioActual.rol === "Invitado") {
+        alert("Solo usuarios registrados pueden enviar mensajes al Buzón del Alma.");
+        return;
+      }
+      const val = buzonTexto.value.trim();
+      if (!val) return;
+      buzMensajes.push({
+        texto: val,
+        fecha: new Date().toLocaleString()
+      });
+      saveBuzon();
+      buzonTexto.value = "";
+      renderBuzon();
+    };
+  }
+
+  // CONTACTO
+  const contactoForm = document.getElementById("contactoForm");
+  const contactoNombre = document.getElementById("contactoNombre");
+  const contactoCorreo = document.getElementById("contactoCorreo");
+  const contactoMensaje = document.getElementById("contactoMensaje");
+  const contactoEnviarBtn = document.getElementById("contactoEnviarBtn");
+
+  if (contactoEnviarBtn && contactoForm) {
+    contactoEnviarBtn.onclick = () => {
+      if (!usuarioActual || usuarioActual.rol === "Invitado") {
+        alert("Para enviar un mensaje al autor necesitas registrarte o iniciar sesión.");
+        return;
+      }
+      if (!contactoNombre.value.trim() ||
+          !contactoCorreo.value.trim() ||
+          !contactoMensaje.value.trim()) {
+        alert("Por favor completa todos los campos.");
+        return;
+      }
+      alert("Mensaje enviado (simulado). Gracias por escribirle al autor 💌");
+      contactoForm.reset();
+    };
+  }
+
+  // PERFIL / AUTOR
+  const perfilNombre = document.getElementById("perfilNombre");
+  const perfilCorreo = document.getElementById("perfilCorreo");
+  const perfilRolBadge = document.getElementById("perfilRolBadge");
+  const perfilTitulo = document.getElementById("perfilTitulo");
+  const perfilSubtitulo = document.getElementById("perfilSubtitulo");
+
+  const avatarInicial = document.getElementById("avatarInicial");
+  const avatarImg = document.getElementById("avatarImg");
+  const avatarInput = document.getElementById("avatarInput");
+  const avatarLabel = document.getElementById("avatarLabel");
+
+  const bubbleAvatarInicial = document.getElementById("bubbleAvatarInicial");
+  const bubbleAvatarImg = document.getElementById("bubbleAvatarImg");
+
+  const editarApodoBtn = document.getElementById("editarApodoBtn");
+  const cambiarPassBtn = document.getElementById("cambiarPassBtn");
+  const cambiarEstadoBtn = document.getElementById("cambiarEstadoBtn");
+  const cerrarSesionBtn = document.getElementById("cerrarSesionBtn");
+
+  const autorZona = document.getElementById("autorZona");
+  const miembrosLista = document.getElementById("miembrosLista");
+
+  // GALERÍA VISUAL
+  const galeriaAutor = document.getElementById("galeriaAutor");
+  const galeriaGrid = document.getElementById("galeriaGrid");
+  const addNotaVisualBtn = document.getElementById("addNotaVisualBtn");
+  let notasAutorVisual = [];
+  try { notasAutorVisual = JSON.parse(localStorage.getItem("notas_autor_visual") || "[]"); } catch { notasAutorVisual = []; }
+  function saveNotasAutorVisual() {
+    localStorage.setItem("notas_autor_visual", JSON.stringify(notasAutorVisual));
+  }
+  function renderNotasAutorVisual() {
+    if (!galeriaGrid) return;
+    galeriaGrid.innerHTML = "";
+    notasAutorVisual.forEach((nota, idx) => {
+      const card = document.createElement("div");
+      card.className = "nota-card";
+
+      const img = document.createElement("img");
+      img.src = nota.img;
+      img.alt = nota.titulo || "Nota visual";
+
+      const title = document.createElement("p");
+      title.className = "nota-title";
+      title.textContent = nota.titulo || "Sin título";
+
+      card.appendChild(img);
+      card.appendChild(title);
+
+      if (usuarioActual && usuarioActual.rol === "Autor") {
+        const actions = document.createElement("div");
+        actions.className = "nota-actions";
+
+        const borrarBtn = document.createElement("button");
+        borrarBtn.className = "chip-btn danger";
+        borrarBtn.textContent = "Eliminar";
+        borrarBtn.onclick = () => {
+          if (!confirm("¿Eliminar esta nota visual?")) return;
+          notasAutorVisual.splice(idx, 1);
+          saveNotasAutorVisual();
+          renderNotasAutorVisual();
+        };
+
+        actions.appendChild(borrarBtn);
+        card.appendChild(actions);
+      }
+
+      galeriaGrid.appendChild(card);
+    });
+  }
+
+  if (addNotaVisualBtn) {
+    addNotaVisualBtn.onclick = () => {
+      if (!usuarioActual || usuarioActual.rol !== "Autor") {
+        alert("Solo el autor puede agregar notas visuales.");
+        return;
+      }
+      const titulo = prompt("Título de la nota visual:");
+      if (!titulo || !titulo.trim()) return;
+      const input = document.createElement("input");
+      input.type = "file";
+      input.accept = "image/*";
+      input.onchange = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          notasAutorVisual.unshift({
+            titulo: titulo.trim(),
+            img: ev.target.result,
+            fecha: new Date().toLocaleString()
+          });
+          saveNotasAutorVisual();
+          renderNotasAutorVisual();
+        };
+        reader.readAsDataURL(file);
+      };
+      input.click();
+    };
+  }
+
+  function renderMiembros() {
+    if (!miembrosLista) return;
+    miembrosLista.innerHTML = "";
+    const ordenados = [...usuarios].filter(u => u.correo).sort((a,b) => new Date(a.fechaRegistro || 0) - new Date(b.fechaRegistro || 0));
+    ordenados.forEach((u, i) => {
+      if (u.correo === AUTHOR_EMAIL.toLowerCase()) return;
+      const row = document.createElement("div");
+      row.className = "miembro-row";
+
+      const name = document.createElement("strong");
+      name.textContent = u.nombre || "Sin nombre";
+
+      const email = document.createElement("span");
+      email.textContent = u.correo;
+
+      const meta = document.createElement("div");
+      meta.className = "miembro-meta";
+      meta.textContent = (u.fechaRegistro || "") + (u.rol ? " · " + u.rol : "");
+
+      const btnRow = document.createElement("div");
+      const resetBtn = document.createElement("button");
+      resetBtn.className = "chip-btn";
+      resetBtn.textContent = "Resetear contraseña";
+      resetBtn.onclick = () => {
+        const nueva = prompt("Nueva contraseña para " + (u.nombre || u.correo) + ":");
+        if (!nueva || !nueva.trim()) return;
+        usuarios[i].password = nueva.trim();
+        guardarUsuarios();
+        alert("Contraseña actualizada.");
+      };
+      btnRow.appendChild(resetBtn);
+
+      row.appendChild(name);
+      row.appendChild(email);
+      row.appendChild(meta);
+      row.appendChild(btnRow);
+
+      miembrosLista.appendChild(row);
+    });
+  }
+
+  function actualizarPerfilUI() {
+    actualizarEstadoInicio();
+
+    // Ajustar texto del ítem de menú de perfil según rol
+    if (menuPerfilItem) {
+      if (!usuarioActual || usuarioActual.rol === "Invitado") {
+        menuPerfilItem.textContent = "Perfil del autor";
+      } else {
+        menuPerfilItem.textContent = "Mi perfil";
+      }
+    }
+
+    // Invitado: ve solo perfil del autor
+    if (!usuarioActual || usuarioActual.rol === "Invitado") {
+      if (perfilTitulo) perfilTitulo.textContent = "Perfil del autor";
+      if (perfilSubtitulo) perfilSubtitulo.textContent = "Información pública de la autora de Maelys Stories.";
+      if (perfilMenuLink) perfilMenuLink.textContent = "Autor";
+
+      if (perfilNombre) perfilNombre.textContent = "Maelys (Autor)";
+      if (perfilCorreo) perfilCorreo.textContent = AUTHOR_EMAIL;
+      if (perfilRolBadge) {
+        perfilRolBadge.textContent = "Autor";
+        perfilRolBadge.className = "badge-rol autor";
+      }
+
+      if (avatarInicial) {
+        avatarInicial.textContent = "M";
+        avatarInicial.classList.remove("hidden");
+      }
+      if (avatarImg) avatarImg.classList.add("hidden");
+
+      if (editarApodoBtn) editarApodoBtn.style.display = "none";
+      if (cambiarPassBtn) cambiarPassBtn.style.display = "none";
+      if (cambiarEstadoBtn) cambiarEstadoBtn.style.display = "none";
+      if (avatarLabel) avatarLabel.style.display = "none";
+      if (autorZona) autorZona.classList.add("hidden");
+
+      if (galeriaAutor) galeriaAutor.classList.remove("hidden");
+      renderNotasAutorVisual();
+      if (addNotaVisualBtn) addNotaVisualBtn.classList.add("hidden");
+
+      if (bubbleAvatarInicial && bubbleAvatarImg) {
+        bubbleAvatarImg.classList.add("hidden");
+        bubbleAvatarInicial.classList.remove("hidden");
+        bubbleAvatarInicial.textContent = "M";
+      }
+      return;
+    }
+
+    // No invitado: lector o autor
+    if (perfilTitulo) perfilTitulo.textContent = "Perfil";
+    if (perfilSubtitulo) perfilSubtitulo.textContent = "Tu espacio personal dentro de Maelys Stories.";
+    if (perfilMenuLink) perfilMenuLink.textContent = "Perfil";
+
+    if (perfilNombre) perfilNombre.textContent = usuarioActual.nombre || "Usuario";
+    if (perfilCorreo) perfilCorreo.textContent = usuarioActual.correo || "";
+
+    let rolTexto = "Lector";
+    let rolClase = "badge-rol lector";
+    if (usuarioActual.rol === "Autor") {
+      rolTexto = "Autor";
+      rolClase = "badge-rol autor";
+    }
+    if (perfilRolBadge) {
+      perfilRolBadge.textContent = rolTexto;
+      perfilRolBadge.className = rolClase;
+    }
+
+    const inicial = (usuarioActual.nombre || "U").charAt(0).toUpperCase();
+    if (avatarImg && avatarInicial) {
+      if (usuarioActual.avatar) {
+        avatarImg.src = usuarioActual.avatar;
+        avatarImg.classList.remove("hidden");
+        avatarInicial.classList.add("hidden");
+      } else {
+        avatarImg.classList.add("hidden");
+        avatarInicial.classList.remove("hidden");
+        avatarInicial.textContent = inicial;
+      }
+    }
+
+    // Burbuja inicio
+    if (bubbleAvatarInicial && bubbleAvatarImg) {
+      if (usuarioActual.rol === "Autor") {
+        if (usuarioActual.avatar) {
+          bubbleAvatarImg.src = usuarioActual.avatar;
+          bubbleAvatarImg.classList.remove("hidden");
+          bubbleAvatarInicial.classList.add("hidden");
+        } else {
+          bubbleAvatarImg.classList.add("hidden");
+          bubbleAvatarInicial.classList.remove("hidden");
+          bubbleAvatarInicial.textContent = inicial;
+        }
+      } else {
+        bubbleAvatarImg.classList.add("hidden");
+        bubbleAvatarInicial.classList.remove("hidden");
+        bubbleAvatarInicial.textContent = "M";
+      }
+    }
+
+    // Autor vs Lector
+    if (usuarioActual.rol === "Autor") {
+      if (editarApodoBtn) editarApodoBtn.style.display = "inline-flex";
+      if (cambiarPassBtn) cambiarPassBtn.style.display = "inline-flex";
+      if (cambiarEstadoBtn) cambiarEstadoBtn.style.display = "inline-flex";
+      if (avatarLabel) avatarLabel.style.display = "inline-block";
+      if (autorZona) {
+        autorZona.classList.remove("hidden");
+        renderMiembros();
+      }
+      if (galeriaAutor) galeriaAutor.classList.remove("hidden");
+      renderNotasAutorVisual();
+      if (addNotaVisualBtn) addNotaVisualBtn.classList.remove("hidden");
+    } else { // lector
+      if (editarApodoBtn) editarApodoBtn.style.display = "inline-flex";
+      if (cambiarPassBtn) cambiarPassBtn.style.display = "inline-flex";
+      if (cambiarEstadoBtn) cambiarEstadoBtn.style.display = "none";
+      if (avatarLabel) avatarLabel.style.display = "inline-block";
+      if (autorZona) autorZona.classList.add("hidden");
+      if (galeriaAutor) galeriaAutor.classList.remove("hidden");
+      renderNotasAutorVisual();
+      if (addNotaVisualBtn) addNotaVisualBtn.classList.add("hidden");
+    }
+  }
+
+  if (avatarInput) {
+    avatarInput.addEventListener("change", (e) => {
+      const file = e.target.files[0];
+      if (!file || !usuarioActual || usuarioActual.rol === "Invitado") return;
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        usuarioActual.avatar = ev.target.result;
+        usuarios = usuarios.map(u => u.correo === usuarioActual.correo ? usuarioActual : u);
+        guardarUsuarios();
+        actualizarPerfilUI();
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  if (editarApodoBtn) {
+    editarApodoBtn.onclick = () => {
+      if (!usuarioActual || usuarioActual.rol === "Invitado") return;
+      const nuevo = prompt("Nuevo apodo:", usuarioActual.nombre || "");
+      if (!nuevo || !nuevo.trim()) return;
+      usuarioActual.nombre = nuevo.trim();
+      usuarios = usuarios.map(u => u.correo === usuarioActual.correo ? usuarioActual : u);
+      guardarUsuarios();
+      actualizarPerfilUI();
+    };
+  }
+
+  if (cambiarPassBtn) {
+    cambiarPassBtn.onclick = () => {
+      if (!usuarioActual || usuarioActual.rol === "Invitado") return;
+      const actual = prompt("Contraseña actual:");
+      if (actual !== usuarioActual.password) {
+        alert("Contraseña actual incorrecta.");
+        return;
+      }
+      const nueva = prompt("Nueva contraseña:");
+      if (!nueva || !nueva.trim()) return;
+      usuarioActual.password = nueva.trim();
+      usuarios = usuarios.map(u => u.correo === usuarioActual.correo ? usuarioActual : u);
+      guardarUsuarios();
+      alert("Contraseña actualizada.");
+    };
+  }
+
+  if (cambiarEstadoBtn) {
+    cambiarEstadoBtn.onclick = () => {
+      if (!usuarioActual || usuarioActual.rol !== "Autor") {
+        alert("Solo el autor puede cambiar su estado de ánimo.");
+        return;
+      }
+      const nuevo = prompt("¿Desde qué estado estás escribiendo hoy? (Ej: En calma, Sensible, Inspirada...)", estadoAutor);
+      if (!nuevo || !nuevo.trim()) return;
+      estadoAutor = nuevo.trim();
+      saveEstadoAutor();
+      actualizarEstadoInicio();
+    };
+  }
+
+  if (cerrarSesionBtn) {
+    cerrarSesionBtn.onclick = () => {
+      if (confirm("¿Cerrar sesión?")) salirDelSistema();
+    };
+  }
+
+  function inicializarApp() {
+    showSection("inicio");
+    renderHistorias();
+    renderDiario();
+    renderBuzon();
+    actualizarPerfilUI();
+  }
+
+  // Estado de ánimo inicial
+  actualizarEstadoInicio();
+</script>
+
+
+<script>
+// --- Destacadas: carga y render en Inicio ---
+function loadDestacadasOnInicio() {
+  try {
+    const hs = JSON.parse(localStorage.getItem('historias_v2') || '[]');
+    const dest = hs.filter(h => h.destacada);
+    const container = document.getElementById('destacadasGrid');
+    if (!container) return;
+    container.innerHTML = '';
+    if (dest.length === 0) {
+      container.innerHTML = '<p class="muted">No hay historias destacadas aún.</p>';
+      return;
+    }
+    dest.forEach(h => {
+      const card = document.createElement('div');
+      card.className = 'destacada-card';
+      const img = document.createElement('div');
+      img.className = 'destacada-cover';
+      if (h.portada) {
+        img.style.backgroundImage = `url(${h.portada})`;
+      } else {
+        img.style.backgroundImage = 'url(assets/lannie-placeholder.png)';
+      }
+      const info = document.createElement('div');
+      info.className = 'destacada-info';
+      info.innerHTML = `<strong>${h.titulo || 'Sin título'}</strong><span class="tipo">${h.tipo || ''}</span>`;
+      const ver = document.createElement('button');
+      ver.className = 'chip-btn';
+      ver.textContent = 'Ver';
+      ver.onclick = () => {
+        // buscar índice de la historia y abrir detalle si existe
+        const hsAll = JSON.parse(localStorage.getItem('historias_v2') || '[]');
+        const idx = hsAll.findIndex(x => x.titulo === h.titulo);
+        if (idx >= 0) {
+          if (typeof abrirDetalleHistoria === 'function') {
+            abrirDetalleHistoria(idx);
+            showSection('historias');
+            // abrir detalle hace que se muestre la historia
+          }
+        } else {
+          alert('No se encontró la historia.');
+        }
+      };
+      card.appendChild(img);
+      card.appendChild(info);
+      card.appendChild(ver);
+      container.appendChild(card);
+    });
+  } catch (e) {
+    console.error('Error cargando destacadas', e);
+  }
+}
+
+// --- Inyectar botón "Destacar" en cards de la Biblioteca ---
+function attachDestacarButtons() {
+  // espera que renderHistorias haya creado los elementos .story-card
+  const lista = document.getElementById('historiasLista');
+  if (!lista) return;
+  // cada vez que se modifica el contenido, volvemos a inyectar
+  const observer = new MutationObserver(() => {
+    const cards = lista.querySelectorAll('.historia-card');
+    cards.forEach((card, idx) => {
+      if (card.querySelector('.destacar-btn')) return;
+      const btn = document.createElement('button');
+      btn.className = 'chip-btn destacar-btn';
+      btn.textContent = '⭐ Destacar';
+      btn.style.marginLeft = '6px';
+      btn.onclick = () => {
+        const hs = JSON.parse(localStorage.getItem('historias_v2') || '[]');
+        // intentar identificar por título
+        const title = card.querySelector('h3') ? card.querySelector('h3').textContent : null;
+        const index = hs.findIndex(h => h.titulo === title);
+        if (index === -1) { alert('No se pudo localizar la historia en storage. Si la creaste recientemente, recarga la página.'); return; }
+        // validar límite 10
+        const actuales = hs.filter(x => x.destacada).length;
+        if (!hs[index].destacada && actuales >= 10) {
+          alert('Límite de 10 historias destacadas alcanzado. Quita una antes de destacar otra.');
+          return;
+        }
+        hs[index].destacada = !hs[index].destacada;
+        localStorage.setItem('historias_v2', JSON.stringify(hs));
+        loadDestacadasOnInicio();
+        // actualizar UI del listado
+        if (hs[index].destacada) btn.textContent = '❌ Quitar destaque'; else btn.textContent = '⭐ Destacar';
+      };
+      // si usuario no es autor, ocultar botón
+      const isAutor = (window.usuarioActual && window.usuarioActual.rol === 'Autor');
+      if (!isAutor) btn.style.display = 'none';
+      const actions = card.querySelector('.historia-actions');
+      if (actions) actions.appendChild(btn);
+    });
+  });
+  observer.observe(lista, { childList: true, subtree: true });
+}
+
+// --- Añadir funcionalidad de nota en Conoce a Lannie (autor) ---
+function setupLannieNotes() {
+  const btn = document.getElementById('addLannieNoteBtn');
+  if (!btn) return;
+  btn.onclick = () => {
+    if (!window.usuarioActual || window.usuarioActual.rol !== 'Autor') {
+      alert('Solo el autor puede añadir notas de Lannie.');
+      return;
+    }
+    const text = prompt('Nueva nota para Lannie:');
+    if (!text) return;
+    let notes = JSON.parse(localStorage.getItem('lannie_notes') || '[]');
+    notes.unshift({ text, fecha: new Date().toLocaleString() });
+    localStorage.setItem('lannie_notes', JSON.stringify(notes));
+    alert('Nota añadida.');
+  };
+}
+
+// Run on load
+document.addEventListener('DOMContentLoaded', () => {
+  try {
+    loadDestacadasOnInicio();
+    attachDestacarButtons();
+    setupLannieNotes();
+  } catch(e){ console.error(e); }
+});
+
+// Also refresh destacadas when historias change (simple interval fallback)
+setInterval(loadDestacadasOnInicio, 2500);
+</script>
+
+</body>
+</html>
+}

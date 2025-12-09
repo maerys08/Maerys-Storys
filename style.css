@@ -1,0 +1,896 @@
+:root {
+  --rosa-fondo: #ffeef7;
+  --rosa-claro: #ffd3e8;
+  --rosa-intenso: #ff8fb7;
+  --amarillo-pastel: #fff3c4;
+  --celeste-pastel: #d9f2ff;
+  --beige: #fff7f0;
+  --texto: #4b3b4f;
+  --sombra: 0 10px 25px rgba(255, 143, 183, 0.25);
+}
+
+/* RESET */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Quicksand", sans-serif;
+  background: var(--rosa-fondo);
+  color: var(--texto);
+  line-height: 1.6;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* MODO NOCHE */
+body.night-mode {
+  background: #1b1427;
+  color: #f7ecff;
+}
+
+body.night-mode .main-header {
+  background: #2a1a3a;
+  box-shadow: none;
+}
+
+body.night-mode .section,
+body.night-mode .hero-card,
+body.night-mode .buzon-box,
+body.night-mode .story-card,
+body.night-mode .diario-entry,
+body.night-mode .buzon-mensaje-card,
+body.night-mode .historia-detalle,
+body.night-mode .contact-form,
+body.night-mode .perfil-top,
+body.night-mode .autor-zona,
+body.night-mode .autor-galeria,
+body.night-mode .music-widget,
+body.night-mode .nota-card,
+body.night-mode .miembro-row,
+body.night-mode .more-menu {
+  background: #2a1a3a;
+  color: #f7ecff;
+  border-color: #8d6bb5;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7);
+}
+
+body.night-mode .main-footer {
+  color: #d2baf0;
+}
+
+/* AUTH SCREEN */
+.auth-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at top, #ffd3e8, #ffeef7);
+  padding: 20px;
+}
+
+.auth-card {
+  background: #fff7f0;
+  border-radius: 24px;
+  padding: 24px 20px;
+  max-width: 360px;
+  width: 100%;
+  box-shadow: var(--sombra);
+  text-align: center;
+}
+
+.auth-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.logo-icon {
+  font-size: 1.7rem;
+}
+
+.logo-text {
+  font-family: "Pacifico", cursive;
+  font-size: 1.5rem;
+  color: var(--rosa-intenso);
+}
+
+.auth-subtitle {
+  font-size: 0.85rem;
+  color: #6e5a7b;
+  margin-bottom: 16px;
+}
+
+.auth-form h2 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.auth-form label {
+  display: block;
+  text-align: left;
+  font-size: 0.85rem;
+  margin-bottom: 10px;
+}
+
+.auth-form input {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid var(--rosa-claro);
+  padding: 8px;
+  margin-top: 4px;
+  font-family: inherit;
+}
+
+.auth-btn {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.auth-switch {
+  margin-top: 10px;
+  font-size: 0.8rem;
+}
+
+.link-btn {
+  border: none;
+  background: none;
+  color: var(--rosa-intenso);
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 0.8rem;
+}
+
+/* APP SHELL */
+.app-shell.hidden {
+  display: none;
+}
+
+/* HEADER */
+.main-header {
+  background: var(--beige);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  box-shadow: var(--sombra);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.main-nav {
+  display: flex;
+  gap: 10px;
+}
+
+.main-nav a {
+  text-decoration: none;
+  color: var(--texto);
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.main-nav a:hover {
+  background: var(--rosa-claro);
+  transform: translateY(-1px);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.modo-toggle {
+  border: none;
+  border-radius: 999px;
+  padding: 6px 12px;
+  background: var(--celeste-pastel);
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+}
+
+/* MENÚ TRES PUNTITOS */
+.more-menu-container {
+  position: relative;
+}
+
+.more-menu-btn {
+  border: none;
+  border-radius: 999px;
+  padding: 4px 10px;
+  background: var(--beige);
+  cursor: pointer;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.more-menu {
+  position: absolute;
+  right: 0;
+  top: 120%;
+  background: white;
+  border-radius: 12px;
+  box-shadow: var(--sombra);
+  padding: 6px 0;
+  min-width: 160px;
+  z-index: 30;
+}
+
+.more-menu-item {
+  width: 100%;
+  padding: 6px 14px;
+  background: none;
+  border: none;
+  text-align: left;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.more-menu-item:hover {
+  background: var(--rosa-claro);
+}
+
+/* SECCIONES APP */
+.section {
+  max-width: 1100px;
+  margin: auto;
+  padding: 40px 20px;
+}
+
+.app-section {
+  display: none;
+}
+.app-section.active {
+  display: block;
+}
+
+/* HERO INICIO (columna) */
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.hero-column .hero-left {
+  text-align: center;
+  max-width: 600px;
+}
+
+.hero-column .hero-right {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* Texto de bienvenida dividido */
+.bienvenida-peque {
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+
+.grande-bienvenida {
+  font-size: 1.4rem;
+}
+
+.marca-grande {
+  font-family: "Pacifico", cursive;
+  font-size: 2.6rem;
+  color: var(--rosa-intenso);
+  margin-bottom: 8px;
+}
+
+.hero-left p {
+  font-size: 0.95rem;
+  margin-bottom: 14px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #ffb8d4, #ff8fb7);
+  color: white;
+  padding: 10px 22px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  box-shadow: var(--sombra);
+  border: none;
+  cursor: pointer;
+}
+
+.btn-secondary {
+  border: none;
+  border-radius: 999px;
+  padding: 8px 16px;
+  background: var(--celeste-pastel);
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.85rem;
+  margin-bottom: 15px;
+}
+
+.btn-secondary.small {
+  padding: 6px 14px;
+  font-size: 0.8rem;
+}
+
+.hero-card {
+  background: white;
+  border-radius: 26px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: var(--sombra);
+}
+
+.hero-text {
+  font-size: 0.85rem;
+  margin: 10px 0;
+}
+
+.hero-books {
+  font-size: 1.3rem;
+}
+
+.lannie-img {
+  width: 90px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* MÚSICA (arriba izquierda del inicio) */
+.music-widget {
+  background: white;
+  border-radius: 18px;
+  padding: 12px 16px;
+  box-shadow: var(--sombra);
+  max-width: 320px;
+  margin-bottom: 18px;
+}
+
+.music-top-left {
+  margin-left: 0;
+}
+
+.music-label {
+  font-size: 0.9rem;
+  margin-bottom: 6px;
+}
+.music-note {
+  font-size: 0.75rem;
+  color: #8a738f;
+  margin-top: 4px;
+}
+.music-widget audio {
+  width: 100%;
+}
+
+/* SOBRE EL AUTOR BURBUJA */
+.sobre-mi-box {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.bubble-btn {
+  border: none;
+  background: var(--amarillo-pastel);
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: var(--sombra);
+}
+
+.bubble-author {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+}
+
+.bubble-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--beige);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: var(--sombra);
+}
+
+.bubble-avatar-inicial {
+  font-size: 1rem;
+  color: var(--rosa-intenso);
+  font-weight: 700;
+}
+
+.bubble-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bubble-author-text {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.sobre-mi-content {
+  max-width: 650px;
+  margin: 12px auto 0;
+  background: white;
+  border-radius: 20px;
+  padding: 0 18px;
+  box-shadow: var(--sombra);
+  border: 1px solid var(--rosa-claro);
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.sobre-mi-content.open {
+  max-height: 350px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  opacity: 1;
+}
+
+.sobre-mi-content p {
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+}
+
+/* ESTADO EMOCIONAL COMO BURBUJA */
+.estado-autor {
+  margin-top: 18px;
+  text-align: center;
+}
+.estado-chip {
+  display: inline-block;
+  background: var(--beige);
+  border-radius: 999px;
+  padding: 6px 14px;
+  box-shadow: var(--sombra);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* TITULOS SECCIÓN */
+.section-title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.section-title h2 {
+  font-size: 1.7rem;
+  margin-bottom: 4px;
+}
+
+.section-title p {
+  font-size: 0.9rem;
+  color: #6e5a7b;
+}
+
+/* CHIP BUTTONS */
+.chip-btn {
+  border: none;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  background: var(--rosa-claro);
+}
+
+.chip-btn.danger {
+  background: #ffd0d8;
+  color: #7b1f3f;
+}
+
+/* HISTORIAS */
+.stories-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.story-card {
+  background: var(--beige);
+  padding: 14px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  box-shadow: var(--sombra);
+}
+
+.historia-actions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.historia-detalle {
+  margin-top: 25px;
+  background: white;
+  border-radius: 22px;
+  padding: 18px;
+  box-shadow: var(--sombra);
+  border: 1px solid var(--rosa-claro);
+}
+
+.historia-detalle-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.capitulos-lista {
+  margin-top: 12px;
+}
+
+.capitulo-card {
+  background: var(--beige);
+  padding: 12px;
+  border-radius: 18px;
+  margin-bottom: 10px;
+  box-shadow: var(--sombra);
+  font-size: 0.88rem;
+}
+
+/* DIARIO LANNIE */
+.diario-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  margin-top: 12px;
+}
+
+.diario-entry {
+  background: white;
+  padding: 12px;
+  border-radius: 18px;
+  box-shadow: var(--sombra);
+  font-size: 0.9rem;
+}
+
+.diario-meta {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.75rem;
+  color: #8a738f;
+}
+
+/* BUZÓN */
+.buzon-box {
+  background: white;
+  border-radius: 22px;
+  padding: 16px;
+  box-shadow: var(--sombra);
+  border: 1px solid var(--rosa-claro);
+}
+
+.buzon-info {
+  font-size: 0.88rem;
+  margin-bottom: 10px;
+  color: #6b566f;
+}
+
+.buzon-box textarea {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid var(--rosa-claro);
+  padding: 8px;
+  margin-bottom: 8px;
+  font-family: inherit;
+  font-size: 0.9rem;
+}
+
+.buzon-mensajes {
+  margin-top: 18px;
+}
+
+.buzon-mensaje-card {
+  background: white;
+  border-radius: 18px;
+  padding: 12px;
+  margin-bottom: 10px;
+  box-shadow: var(--sombra);
+  font-size: 0.88rem;
+}
+
+.buzon-meta {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.75rem;
+  color: #8a738f;
+}
+
+/* CONTACTO */
+.contact-form {
+  max-width: 480px;
+  margin: 0 auto 16px;
+  background: white;
+  padding: 18px;
+  border-radius: 22px;
+  box-shadow: var(--sombra);
+  border: 1px solid var(--rosa-claro);
+}
+
+.contact-form label {
+  display: block;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid var(--rosa-claro);
+  padding: 8px;
+  margin-top: 4px;
+  font-family: inherit;
+  font-size: 0.9rem;
+}
+
+.contact-extra {
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.contact-extra ul {
+  list-style: none;
+  margin-top: 6px;
+  padding: 0;
+}
+
+.contact-extra li {
+  margin-bottom: 4px;
+}
+
+/* PERFIL */
+.perfil-top {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.perfil-avatar-box {
+  text-align: center;
+}
+
+.perfil-avatar {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: var(--beige);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: var(--sombra);
+  margin: 0 auto 8px;
+}
+
+.perfil-avatar-inicial {
+  font-size: 2.2rem;
+  color: var(--rosa-intenso);
+}
+
+.perfil-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.perfil-avatar-btn {
+  font-size: 0.8rem;
+  cursor: pointer;
+  color: #6e5a7b;
+}
+
+.perfil-info h3 {
+  font-size: 1.3rem;
+  margin-bottom: 4px;
+}
+
+.perfil-correo {
+  font-size: 0.85rem;
+  margin-bottom: 6px;
+}
+
+.badge-rol {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.badge-rol.autor {
+  background: #b6f2c4;
+  color: #1f6b36;
+}
+
+.badge-rol.lector {
+  background: #e1ddff;
+  color: #38306a;
+}
+
+.badge-rol.invitado {
+  background: #f5e3ff;
+  color: #5b3a86;
+}
+
+.perfil-actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+/* ZONA AUTOR: MIEMBROS REGISTRADOS */
+.autor-zona {
+  margin-top: 22px;
+  background: white;
+  border-radius: 22px;
+  padding: 16px;
+  box-shadow: var(--sombra);
+  border: 1px solid var(--rosa-claro);
+}
+
+.autor-miembros-info {
+  font-size: 0.8rem;
+  color: #6b566f;
+  margin-bottom: 8px;
+}
+
+.miembros-lista {
+  margin-top: 8px;
+}
+
+.miembro-row {
+  background: var(--beige);
+  border-radius: 16px;
+  padding: 10px;
+  margin-bottom: 8px;
+  box-shadow: var(--sombra);
+  font-size: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.miembro-meta {
+  font-size: 0.75rem;
+  color: #8a738f;
+}
+
+/* GALERÍA VISUAL DEL AUTOR */
+.autor-galeria {
+  margin-top: 22px;
+  background: white;
+  border-radius: 22px;
+  padding: 16px;
+  box-shadow: var(--sombra);
+  border: 1px solid var(--rosa-claro);
+}
+
+.galeria-grid {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.nota-card {
+  background: var(--beige);
+  border-radius: 16px;
+  padding: 8px;
+  box-shadow: var(--sombra);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.nota-card img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 6px;
+}
+
+.nota-title {
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.nota-actions {
+  margin-top: 6px;
+}
+
+/* FOOTER */
+.main-footer {
+  text-align: center;
+  padding: 22px;
+  font-size: 0.8rem;
+  color: #9a7aa3;
+}
+
+/* RESPONSIVE */
+@media (max-width: 850px) {
+  .hero {
+    padding-top: 0;
+  }
+
+  .stories-grid,
+  .diario-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .main-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .main-nav {
+    flex-wrap: wrap;
+  }
+
+  .header-actions {
+    align-self: flex-end;
+    margin-top: 6px;
+  }
+
+  .perfil-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .music-widget {
+    max-width: 100%;
+  }
+}
+
+
+/* --- Styles añadidos para Historias Destacadas y Conoce a Lannie --- */
+.destacadas-inicio { margin: 18px auto 28px; max-width: 1100px; padding: 12px 20px; background: transparent; }
+.destacadas-title { font-size: 1.1rem; color: #6e5a7b; margin-bottom: 8px; text-align: left; }
+.destacadas-grid { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 6px; }
+.destacada-card { min-width: 160px; background: var(--beige); border-radius: 12px; box-shadow: var(--sombra); padding: 8px; display:flex; flex-direction:column; gap:8px; align-items:flex-start; }
+.destacada-cover { width: 100%; height: 110px; background-size: cover; background-position: center; border-radius: 8px; }
+.destacada-info { font-size: 0.9rem; display:flex; gap:6px; align-items:center; justify-content:space-between; width:100%; }
+.destacada-info .tipo { font-size:0.75rem; color:#8a738f; margin-left:6px; }
+
+.lannie-grid { display: grid; grid-template-columns: 1fr 360px; gap: 18px; align-items:start; margin-top: 8px; }
+.lannie-bio-card, .lannie-secrets-card { background: white; border-radius: 16px; padding: 14px; box-shadow: var(--sombra); border: 1px solid var(--rosa-claro); }
+.lannie-bio-card h3, .lannie-secrets-card h3 { margin-bottom:8px; }
+.lannie-bio-content p { margin-bottom:8px; font-size:0.95rem; color:var(--texto); }
+.lannie-secrets-list { font-size:0.9rem; color:#6b566f; padding-left: 18px; }
+.lannie-secrets-list li { margin-bottom:8px; line-height:1.4; }
+
+/* Responsive */
+@media (max-width:850px) {
+  .lannie-grid { grid-template-columns: 1fr; }
+  .destacada-card { min-width: 140px; }
+}
